@@ -13,7 +13,6 @@ import ecjtu.homecoo.remoting.netty.NettyServerConfig;
 public class AppServerController {
 	 // 服务端网络请求处理线程池
   
-	
 	public static void main(String[] args) {
 		initSpring();
 //		InternalLoggerFactory.setDefaultFactory(new Log4JLoggerFactory());

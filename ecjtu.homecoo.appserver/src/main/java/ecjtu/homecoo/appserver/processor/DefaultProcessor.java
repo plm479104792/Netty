@@ -86,7 +86,7 @@ public class DefaultProcessor extends AbstractUpdatProcesser implements NettyReq
 			message.getMessageHead().setData_type(DataType.DATA_ACK_PULSE);
 			ctx.writeAndFlush(message);
 //			System.err.println("目前与netty保存长连接的客户端数目:"+connectionManager.getAllChannel().size());
-//			logger.info("目前与netty保存长连接的客户端数目:"+connectionManager.getAllChannel().size());
+			logger.info("目前与netty保存长连接的客户端数目:"+connectionManager.getAllChannel().size());
 //			/**
 //			 * update by xiaobai 2019-09-21 查看网关是否能回复情景设置
 //			 * */
