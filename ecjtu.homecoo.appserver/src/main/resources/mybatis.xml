@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>  
+        <setting name="aggressiveLazyLoading" value="false"/>  
+    </settings>
+    <typeAliases>
+		<typeAlias alias="TbUser" type="ecjtu.homecoo.appserver.user.bo.TbUserBo"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mapper/TbUser.xml"/>
+		<mapper resource="mapper/DeviceStateMapper.xml" />
+		<mapper resource="mapper/PacketMapper.xml" />
+		<mapper resource="mapper/AlertMapper.xml"  />
+		<mapper resource="mapper/ThemeMusicMapper.xml"  />
+		<mapper resource="mapper/DeviceMapper.xml"  />
+		<mapper resource="mapper/DeviceTypeMapper.xml" />
+	</mappers>
+	
+</configuration>

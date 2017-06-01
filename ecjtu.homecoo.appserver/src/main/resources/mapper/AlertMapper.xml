@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="AlertMapper" >
+  <resultMap id="BaseResultMap" type="ecjtu.homecoo.appserver.domain.Alert" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PACKET" property="packet" jdbcType="VARCHAR" />
+    <result column="TIME" property="time" jdbcType="INTEGER" />
+    <result column="GATEWAY_NO" property="gatewayNo" jdbcType="VARCHAR" />
+    <result column="DEVICE_NO" property="deviceNo" jdbcType="VARCHAR" />
+    <result column="BZ" property="bz" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PACKET, TIME, GATEWAY_NO, DEVICE_NO, BZ
+  </sql>
+  <select id="selectAlertsByGatewayNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_alert
+    where GATEWAY_NO = #{gatewayNo,jdbcType=VARCHAR}
+  </select>
+  	
+  <delete id="deleteAlertBygatewayNo" parameterType="java.lang.String" >
+    delete from t_alert
+    where GATEWAY_NO = #{gatewayNo,jdbcType=VARCHAR}
+  </delete>
+
+  <delete id="deleteAlertByDeviceNo" parameterType="java.lang.String" >
+    delete from t_alert
+    where DEVICE_NO = #{deviceNo,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insertAlert" parameterType="ecjtu.homecoo.appserver.domain.Alert" >
+    insert into t_alert (ID, PACKET, TIME, 
+      GATEWAY_NO, DEVICE_NO, BZ
+      )
+    values (#{id}, #{packet,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER}, 
+      #{gatewayNo,jdbcType=VARCHAR}, #{deviceNo,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <update id="updateAlert" parameterType="ecjtu.homecoo.appserver.domain.Alert" >
+    update t_alert
+    <set >
+      <if test="packet != null" >
+        PACKET = #{packet,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        TIME = #{time,jdbcType=INTEGER},
+      </if>
+      <if test="gatewayNo != null" >
+        GATEWAY_NO = #{gatewayNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bz != null" >
+        BZ = #{bz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEVICE_NO = #{deviceNo,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

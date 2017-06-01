@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="DeviceTypeMapper" >
+  <resultMap id="BaseResultMap" type="ecjtu.homecoo.appserver.domain.DeviceType" >
+    <id column="DEVICE_TYPE_ID" property="deviceTypeId" jdbcType="VARCHAR" />
+    <result column="DEVICE_TYPE_NAME" property="deviceTypeName" jdbcType="VARCHAR" />
+    <result column="DEVICE_CATEGORY_ID" property="deviceCategoryId" jdbcType="INTEGER" />
+    <result column="DEVICE_CATEGORY_NAME" property="deviceCategoryName" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_BY" property="createBy" jdbcType="INTEGER" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_BY" property="updateBy" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEVICE_TYPE_ID, DEVICE_TYPE_NAME, DEVICE_CATEGORY_ID, DEVICE_CATEGORY_NAME, CREATE_TIME, 
+    CREATE_BY, UPDATE_TIME, UPDATE_BY
+  </sql>
+  <select id="selectBydeviceTypeId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_devicetype
+    where DEVICE_TYPE_ID = #{deviceTypeId,jdbcType=VARCHAR}
+  </select>
+</mapper>

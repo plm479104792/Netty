@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Tue Mar 28 15:39:29 CST 2017
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=true
+jarname=E\:\\JAVA\\MyEclipse\\smarthome-workspace-myeclipse\\ecjtu.homecoo.appserver\\netty001\u53BB\u6389\u62A5\u6587\u8F93\u51FA.jar
+manifest.mergeall=true
+manifest.mainclass=ecjtu.homecoo.appserver.AppServerController
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=

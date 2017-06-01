@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ThemeMusicMapper" >
+	<resultMap type="ecjtu.homecoo.appserver.domain.ThemeMusic" id="BaseResultMap">
+		<result column="ID" property="id" jdbcType="INTEGER" />
+		<result column="SONGNAME" property="songName" jdbcType="VARCHAR"  />
+		<result column="THEME_NO" property="themeNo" jdbcType="VARCHAR"  />
+		<result column="DEVICE_NO" property="deviceNo" jdbcType="VARCHAR"  />
+		<result column="DEVICESTATE" property="deviceState" jdbcType="VARCHAR"  />
+		<result column="GATEWAY_NO" property="gatewayNo" jdbcType="VARCHAR"  />
+		<result column="THEMENAME" property="themeName" jdbcType="VARCHAR"  />
+		<result column="STYLE" property="style" jdbcType="VARCHAR"  />
+		<result column="SPACE" property="space" jdbcType="VARCHAR"  />
+		<result column="BZ" property="bz" jdbcType="VARCHAR"  />
+	</resultMap>
+	
+	<select id="getThemeMusicByGatewayNoAndThemeNo" parameterType="ecjtu.homecoo.appserver.domain.ThemeMusic" resultMap="BaseResultMap">
+		select * from t_thememusic where GATEWAY_NO=#{gatewayNo} and THEME_NO=#{themeNo}
+	</select>
+	
+	<select id="getThemeMusicByDeviceNoAndDeviceState" parameterType="ecjtu.homecoo.appserver.domain.ThemeMusic" resultMap="BaseResultMap">
+		select * from t_thememusic where DEVICE_NO=#{deviceNo} and DEVICESTATE=#{deviceState}
+	</select>
+	
+	<select id="getLinkageMusicDeviceNo" parameterType="ecjtu.homecoo.appserver.domain.ThemeMusic" resultMap="BaseResultMap">
+		select * from t_thememusic where DEVICE_NO=#{deviceNo}
+	</select>
+	
+	
+</mapper>

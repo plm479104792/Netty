@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Thu Jul 07 09:54:47 CST 2016
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=C\:\\Users\\zhang_wei\\Desktop\\netty.jar
+manifest.mergeall=true
+manifest.mainclass=ecjtu.homecoo.appserver.AppServerController
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=

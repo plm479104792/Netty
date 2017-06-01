@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DeviceStateMapper">
+	<resultMap id="BaseResultMap" type="ecjtu.homecoo.appserver.domain.DeviceState">
+		<result column="RECORD_ID" property="recordId" jdbcType="INTEGER" />
+		<result column="DEVICE_NO" property="deviceNo" jdbcType="VARCHAR" />
+		<result column="DEVICE_STATE_CMD" property="deviceState" jdbcType="VARCHAR" />
+		<result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+		<result column="LAST_UPDATE_BY" property="updateBy" jdbcType="INTEGER" />
+	</resultMap>
+	<update id="updateDeviceState" parameterType="ecjtu.homecoo.appserver.domain.DeviceState">
+		update t_devicestaterecord set
+		DEVICE_STATE_CMD=#{deviceState},LAST_UPDATE_TIME=#{lastUpdateTime}
+		where DEVICE_NO=#{deviceNo}
+	</update>
+
+	<select id="selectDeviceState" parameterType="ecjtu.homecoo.appserver.domain.DeviceState"
+		resultMap="BaseResultMap">
+		select * from t_devicestaterecord where DEVICE_NO=#{deviceNo}
+	</select>
+
+	<select id="selectDeviceStateOne" parameterType="ecjtu.homecoo.appserver.domain.DeviceState"
+		resultMap="BaseResultMap">
+		select * from t_devicestaterecord where DEVICE_NO=#{deviceNo}
+	</select>
+
+	<insert id="insertDeviceState" parameterType="ecjtu.homecoo.appserver.domain.DeviceState">
+		insert into t_devicestaterecord
+		(RECORD_ID,DEVICE_NO,DEVICE_STATE_CMD,LAST_UPDATE_TIME,LAST_UPDATE_BY)
+		values(#{recordId},#{deviceNo},#{deviceState},#{lastUpdateTime},#{updateBy})
+	</insert>
+
+	<delete id="deletDeviceState" parameterType="ecjtu.homecoo.appserver.domain.DeviceState">
+		delete from t_devicestaterecord where DEVICE_NO=#{deviceNo}
+	</delete>
+
+</mapper>  

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+                        http://www.springframework.org/schema/context  
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+                        http://www.springframework.org/schema/mvc  
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+                        http://mybatis.org/schema/mybatis-spring  
+                       http://mybatis.org/schema/mybatis-spring.xsd">
+
+	<!-- 引入jdbc配置文件 -->
+	<context:annotation-config />
+	<context:component-scan base-package="ecjtu.homecoo.appserver">
+	</context:component-scan>
+	<!-- 引入jdbc配置文件 -->
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- define the SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<!-- <property name="mapperLocations" value="classpath:mapper/**/*.xml" 
+			/> -->
+	</bean>
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	<!--创建jdbc数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- 配置事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="SpringUtil" class="ecjtu.homecoo.appserver.springutil.SpringUtil"   />
+	
+	<!-- 2016-07-08  spring setter注入-->
+	<!-- DAO层 -->
+	<bean id="AlertDao" class="ecjtu.homecoo.appserver.dao.impl.AlertDaoImpl">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	<bean id="DeviceStateDao"  class="ecjtu.homecoo.appserver.dao.impl.DeviceStateDaoImpl">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	<bean id="PacketDao" class="ecjtu.homecoo.appserver.dao.impl.PacketDaoImpl">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	<bean id="ThemeMusicDao" class="ecjtu.homecoo.appserver.dao.impl.ThemeMusicDaoImpl">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	<bean id="DeviceDao" class="ecjtu.homecoo.appserver.dao.impl.DeviceDaoImpl">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	<bean id="DeviceTypeDao" class="ecjtu.homecoo.appserver.dao.impl.DeviceTypeDaoImpl">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+	
+	<!-- SERVER层 -->
+	<bean id="AlertService" class="ecjtu.homecoo.appserver.service.impl.AlertServiceImpl">
+		<property name="AlertDao" ref="AlertDao" />
+	</bean>
+	<bean id="DeviceStateService" class="ecjtu.homecoo.appserver.service.impl.DeviceStateServiceImpl">
+		<property name="DeviceStateDao" ref="DeviceStateDao" />
+	</bean>
+	<bean id="PacketService" class="ecjtu.homecoo.appserver.service.impl.PacketServiceImpl">
+		<property name="PacketDao" ref="PacketDao" />
+	</bean>
+	<bean id="ThemeMusicServie" class="ecjtu.homecoo.appserver.service.impl.ThemeMusicServiceImpl">
+		<property name="ThemeMusicDao"  ref="ThemeMusicDao" />
+	</bean>
+	<bean id="DeviceService" class="ecjtu.homecoo.appserver.service.impl.DeviceServiceImpl">
+		<property name="deviceDao" ref="DeviceDao" />
+		<property name="deviceTypeDao" ref="DeviceTypeDao"/>
+	</bean>
+	
+	
+	<!-- 业务层 -->
+	<bean id="DefaultProcessor" class="ecjtu.homecoo.appserver.processor.DefaultProcessor">
+		<property name="AlertService"  ref="AlertService"/>
+		<property name="DeviceStateService"  ref="DeviceStateService"/>
+		<property name="PacketService"  ref="PacketService"/>
+		<property name="ThemeMusicServie"  ref="ThemeMusicServie"/>
+		<property name="DeviceService" ref="DeviceService" />
+	</bean>
+	
+</beans>
