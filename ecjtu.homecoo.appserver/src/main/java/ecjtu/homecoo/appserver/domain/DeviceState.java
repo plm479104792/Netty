@@ -6,6 +6,7 @@ public class DeviceState {
 	private Integer recordId;
 	private String deviceNo;
 	private String deviceState;
+	private String gatewayNo;
 	private Date lastUpdateTime;
 	private Integer updateBy;
 	public Integer getRecordId() {
@@ -38,11 +39,16 @@ public class DeviceState {
 	public void setUpdateBy(Integer updateBy) {
 		this.updateBy = updateBy;
 	}
+	public String getGatewayNo() {
+		return gatewayNo;
+	}
+	public void setGatewayNo(String gatewayNo) {
+		this.gatewayNo = gatewayNo;
+	}
 	@Override
 	public String toString() {
-		return "DeviceState [recordId=" + recordId + ", deviceNo=" + deviceNo
-				+ ", deviceState=" + deviceState + ", lastUpdateTime="
-				+ lastUpdateTime + ", updateBy=" + updateBy + "]";
+		return "DeviceState [recordId=" + recordId + ", deviceNo=" + deviceNo + ", deviceState=" + deviceState
+				+ ", gatewayNo=" + gatewayNo + ", lastUpdateTime=" + lastUpdateTime + ", updateBy=" + updateBy + "]";
 	}
 	
 }

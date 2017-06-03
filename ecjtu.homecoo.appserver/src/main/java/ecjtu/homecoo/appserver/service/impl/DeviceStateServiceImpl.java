@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import ecjtu.homecoo.appserver.dao.DeviceStateDao;
 import ecjtu.homecoo.appserver.domain.DeviceState;
 import ecjtu.homecoo.appserver.service.DeviceStateService;
+import ecjtu.homecoo.appserver.springutil.GetMessageBody;
 import ecjtu.homecoo.remoting.protocol.Message;
 import ecjtu.homecoo.remoting.protocol.MessageHead;
 import ecjtu.homecoo.remoting.util.BasicProcess;
@@ -23,6 +24,7 @@ public class DeviceStateServiceImpl implements DeviceStateService{
 		String data=bodyString.substring(8);
 		record.setDeviceState(data);
 		record.setDeviceNo(BasicProcess.toHexString(head.getDev_id()));
+		record.setGatewayNo(GetMessageBody.GetGatewayNo(message));
 		record.setLastUpdateTime(new Date());
 		int row=deviceStateDao.updateDeviceState(record);
 		return row;
@@ -33,6 +35,7 @@ public class DeviceStateServiceImpl implements DeviceStateService{
 		byte[] device_id=message.getMessageHead().getDev_id();
 		String deviceNo = BasicProcess.toHexString(device_id);
 		deviceState.setDeviceNo(deviceNo);
+		deviceState.setGatewayNo(GetMessageBody.GetGatewayNo(message));
 		int row= deviceStateDao.selectDeviceState(deviceState);
 		return row;
 	}
@@ -59,6 +62,7 @@ public class DeviceStateServiceImpl implements DeviceStateService{
 		String data=bodyString.substring(8);
 		record.setDeviceState(data);
 		record.setDeviceNo(BasicProcess.toHexString(head.getDev_id()));
+		record.setGatewayNo(GetMessageBody.GetGatewayNo(message));
 		record.setLastUpdateTime(new Date());
 		int row=deviceStateDao.insertDeviceState(record);
 		return row;

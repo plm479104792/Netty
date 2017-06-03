@@ -42,7 +42,7 @@
   </update>
   
   <select id="existsDeviceByDeviceNo" parameterType="String" resultMap="BaseResultMap">
-  	select * from t_device where DEVICE_NO=#{deviceNo}
+  	select * from t_device where DEVICE_NO=#{deviceNo} and GATEWAY_NO=#{gatewayNo}
   </select>
   
   

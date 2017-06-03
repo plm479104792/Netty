@@ -108,10 +108,10 @@ public class DefaultProcessor extends AbstractUpdatProcesser implements NettyReq
 			// 收到网关的 21(同步请求报文)，查看数据库里面有没有该设备，有：更新设备状态；没有，直接插入设备 最后回复一个   61(同步确认报文)
 			short device=0;
 			try {
-			record= deviceStateService.selectDeviceState(message);
+			record= deviceStateService.selectDeviceState(message);   
 			device=message.getMessageHead().getDev_type();
-			deviceService.SaveOrupdateDeviceByDeviceNo(message);
-			if (record > 0) {
+			deviceService.SaveOrupdateDeviceByDeviceNo(message);    //新设备入网添加到device表上
+			if (record > 0) {    
 				deviceStateService.UpdateDeviceState(message);
 			} else {
 				deviceStateService.insertDeviceState(message);
@@ -197,7 +197,7 @@ public class DefaultProcessor extends AbstractUpdatProcesser implements NettyReq
 			if (device1==202) {				
 				//判断硬件情景面板上的设备状态
 				String deviceState=BasicProcess.wgDataToString(bodyString1);   //deviceState为报文穿过来的设置状态
-				System.out.println(device1+"   网关上报设备状态     "+bodyString+"  数据库查询的设备状态  "+deviceState+" "+deviceState.substring(0, 4));
+				logger.info(device1+"   网关上报设备状态     "+bodyString+"  数据库查询的设备状态  "+deviceState+" "+deviceState.substring(0, 4));
 //				deviceState=deviceState.substring(0, 4);
 				if ( state==null || !state.getDeviceState().equals(deviceState)) {   //state数据库里之前的设备  
 					SendThemeMusicJpush(deviceNo, deviceState);

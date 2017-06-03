@@ -23,17 +23,18 @@ public class DeviceServiceImpl implements DeviceService{
 
 	@Override
 	public int SaveOrupdateDeviceByDeviceNo(Message message) {
-		String deviceNo=GetMessageBody.GetDeviceNo(message);
-		boolean b=deviceDao.existsDeviceByDeviceNo(deviceNo);
+		Device device=new Device();
+		device.setDeviceNo(GetMessageBody.GetDeviceNo(message));
+		device.setGatewayNo(GetMessageBody.GetGatewayNo(message));
+		
+		//这里不更新设备状态是因为设备表device里面没有设置状态这个字段，保存在devicestaterecord表里
+		// device表只用于手机端从服务器获取设备
+		boolean b=deviceDao.existsDeviceByDeviceNo(device);
 		int row=0;
-		if (b) {
-			Device device=deviceDao.getDeviceByDeviceNo(deviceNo);
-			device.setGatewayNo(GetMessageBody.GetGatewayNo(message));
-			row=deviceDao.updateDeviceByDeviceNo(device);
-		}else{
+		if (!b) {
 			DeviceType deviceType=deviceTypeDao.selectByPrimaryKey(GetMessageBody.GetDeviceTypeIdShort(message));
-			Device device=GetMessageBody.GetDevice(message, deviceType);
-			row=deviceDao.addDevice(device);
+			Device device1=GetMessageBody.GetDevice(message, deviceType);
+			row=deviceDao.addDevice(device1);
 		}
 		
 		return row;

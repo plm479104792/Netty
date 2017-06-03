@@ -7,18 +7,19 @@
 		<result column="RECORD_ID" property="recordId" jdbcType="INTEGER" />
 		<result column="DEVICE_NO" property="deviceNo" jdbcType="VARCHAR" />
 		<result column="DEVICE_STATE_CMD" property="deviceState" jdbcType="VARCHAR" />
+		<result column="GATEWAY_NO" property="gatewayNo" jdbcType="VARCHAR"/>
 		<result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="TIMESTAMP" />
 		<result column="LAST_UPDATE_BY" property="updateBy" jdbcType="INTEGER" />
 	</resultMap>
 	<update id="updateDeviceState" parameterType="ecjtu.homecoo.appserver.domain.DeviceState">
 		update t_devicestaterecord set
 		DEVICE_STATE_CMD=#{deviceState},LAST_UPDATE_TIME=#{lastUpdateTime}
-		where DEVICE_NO=#{deviceNo}
+		where DEVICE_NO=#{deviceNo} and GATEWAY_NO=#{gatewayNo}
 	</update>
 
 	<select id="selectDeviceState" parameterType="ecjtu.homecoo.appserver.domain.DeviceState"
 		resultMap="BaseResultMap">
-		select * from t_devicestaterecord where DEVICE_NO=#{deviceNo}
+		select * from t_devicestaterecord where DEVICE_NO=#{deviceNo} and GATEWAY_NO=#{gatewayNo}
 	</select>
 
 	<select id="selectDeviceStateOne" parameterType="ecjtu.homecoo.appserver.domain.DeviceState"
@@ -28,8 +29,8 @@
 
 	<insert id="insertDeviceState" parameterType="ecjtu.homecoo.appserver.domain.DeviceState">
 		insert into t_devicestaterecord
-		(RECORD_ID,DEVICE_NO,DEVICE_STATE_CMD,LAST_UPDATE_TIME,LAST_UPDATE_BY)
-		values(#{recordId},#{deviceNo},#{deviceState},#{lastUpdateTime},#{updateBy})
+		(RECORD_ID,DEVICE_NO,DEVICE_STATE_CMD,GATEWAY_NO,LAST_UPDATE_TIME,LAST_UPDATE_BY)
+		values(#{recordId},#{deviceNo},#{deviceState},#{gatewayNo},#{lastUpdateTime},#{updateBy})
 	</insert>
 
 	<delete id="deletDeviceState" parameterType="ecjtu.homecoo.appserver.domain.DeviceState">

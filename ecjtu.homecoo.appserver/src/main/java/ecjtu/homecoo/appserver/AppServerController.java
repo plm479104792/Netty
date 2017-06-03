@@ -9,13 +9,18 @@ import ecjtu.homecoo.appserver.processor.DefaultProcessor;
 import ecjtu.homecoo.appserver.processor.app.AppProcesser;
 import ecjtu.homecoo.remoting.netty.NettyRemotingServer;
 import ecjtu.homecoo.remoting.netty.NettyServerConfig;
+import io.netty.util.internal.logging.InternalLoggerFactory;
+import io.netty.util.internal.logging.Log4JLoggerFactory;
 
+/**
+ *  netty启动类
+ * */
 public class AppServerController {
-	 // 服务端网络请求处理线程池
-  
+
+	
 	public static void main(String[] args) {
 		initSpring();
-//		InternalLoggerFactory.setDefaultFactory(new Log4JLoggerFactory());
+		InternalLoggerFactory.setDefaultFactory(new Log4JLoggerFactory());
 		ChannelManager channelManager = ChannelManager.getInstance();
 		ClientHouseKeepingService clientHousekeepingService = new  ClientHouseKeepingService(channelManager);
 		NettyServerConfig nettyServerConfig = new NettyServerConfig();

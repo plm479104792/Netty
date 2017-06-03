@@ -19,10 +19,10 @@ public class DeviceDaoImpl implements DeviceDao{
 	}
 
 	@Override
-	public boolean existsDeviceByDeviceNo(String deviceNo) {
+	public boolean existsDeviceByDeviceNo(Device device) {
 		boolean b=false;
 //		Device device=sqlSession.selectOne("DeviceMapper.existsDeviceByDeviceNo", deviceNo);   2016-06-31 update
-		List<Device> list=sqlSession.selectList("DeviceMapper.existsDeviceByDeviceNo", deviceNo);
+		List<Device> list=sqlSession.selectList("DeviceMapper.existsDeviceByDeviceNo", device);
 		if (list.size()>0) {
 			b=true;
 		}

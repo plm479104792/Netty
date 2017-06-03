@@ -6,7 +6,7 @@ public interface DeviceDao {
 	
 	int deleteDeviceByDeviceNo(String deviceNo);
 	
-	boolean existsDeviceByDeviceNo(String deviceNo);
+	boolean existsDeviceByDeviceNo(Device device);
 	
 	int updateDeviceByDeviceNo(Device device);
 	

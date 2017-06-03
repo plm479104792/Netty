@@ -6,12 +6,8 @@
 	<settings>  
         <setting name="aggressiveLazyLoading" value="false"/>  
     </settings>
-    <typeAliases>
-		<typeAlias alias="TbUser" type="ecjtu.homecoo.appserver.user.bo.TbUserBo"/>
-	</typeAliases>
 	
 	<mappers>
-		<mapper resource="mapper/TbUser.xml"/>
 		<mapper resource="mapper/DeviceStateMapper.xml" />
 		<mapper resource="mapper/PacketMapper.xml" />
 		<mapper resource="mapper/AlertMapper.xml"  />
