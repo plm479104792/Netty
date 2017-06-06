@@ -1,10 +1,10 @@
 #Fat Jar Configuration File
-#Thu Jul 07 09:54:47 CST 2016
+#Tue Jun 06 15:59:33 CST 2017
 onejar.license.required=false
 manifest.classpath=
 manifest.removesigners=true
-onejar.checkbox=false
-jarname=C\:\\Users\\zhang_wei\\Desktop\\netty.jar
+onejar.checkbox=true
+jarname=C\:\\Users\\WSN-520\\Desktop\\netty\u5916\u7F51\u5220\u9664\u8BBE\u5907.jar
 manifest.mergeall=true
 manifest.mainclass=ecjtu.homecoo.appserver.AppServerController
 manifest.file=<createnew>

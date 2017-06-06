@@ -20,11 +20,11 @@ public class AppProcesser extends AbstractUpdatProcesser {
 		//这个是处理app请求的处理类,具体的业务逻辑就在这里写
 		System.out.println("app单个设备控制报文在这里处理");
 		String gateWayid = BasicProcess.toHexString(request.getMessageHead().getGateway_id());
-		byte[] dev_id=request.getMessageHead().getDev_id();
-		String device_id=BasicProcess.toHexString(dev_id);
-		System.out.println(request.getMessageHead().getData_type()+"	"+gateWayid);
+//		byte[] dev_id=request.getMessageHead().getDev_id();
+//		String device_id=BasicProcess.toHexString(dev_id);
+//		System.out.println(request.getMessageHead().getData_type()+"	"+gateWayid);
 		connectionManager.sendMessage(gateWayid, request);
-		System.out.println("====================================================="+device_id);
+//		System.out.println("====================================================="+device_id);
 		return null;
 	}
 

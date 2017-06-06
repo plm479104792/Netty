@@ -10,11 +10,11 @@ public class DataType {
 	
 	public static final short DATA_STAT=1;  			//设备状态指令   		底层上发报文(上行)  
 	public static final short DATA_CTRL=2;   			//设备执行指令类型   	手机下发报文(下行)
-	public static final short DATA_TUIW = 12; 			//设备退网指令			
+	public static final short DATA_TUIW = 12; 			//设备退网指令		
 	public static final short DATA_CTRL_SCENE=13;    	//手机发送控制情景报文到网关  (netty不做处理   手机处理)
 	public static final short DATA_REQ_SCENE=14;		//服务器主动向网关拉取情景设置
 	public static final short DATA_SET_SCENE=15;		//情景设置	 请求情景设置
-	public static final short DATA_SET_SCENE_WG=16;		//网关同步情景设置信息到netty
+	public static final short DATA_SET_SCENE_WG=16;		//网关同步情景设置信息到ne
 	public static final short DATA_OP_SCE=70;			//情景确认
 	public static final short DATA_FINISH_SCENE=17;		//手机端情景更新之后要finish下再发给网关	(netty 不做处理，手机处理)
 	public static final short DATA_DELETE_SCENE=18;		//删除情景

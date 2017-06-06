@@ -213,23 +213,33 @@ public class DefaultProcessor extends AbstractUpdatProcesser implements NettyReq
 			
 		case DataType.DATA_TUIW:
 			// 收到网关的 12(设备退网报文) 去devicestate表中删除该设备 不用返回报文给网关
-			try {
-				deviceStateService.deleteDeviceState(message);
-				deviceService.deleteDevcieByDeviceNo(message);
-				logger.info("设备"+message.getMessageHead().getDev_type()+"退网成功！");
-			} catch (Exception e) {
-				e.printStackTrace();
+			String gatewayNo=GetMessageBody.GetGatewayNo(message);  //获取报文的网关号
+			int tuiw=message.getDataFrom();
+			if (tuiw==1) {   //来自app的删除设备报文
+				System.out.println(MessageToPacket.ToPacket(message));
+				logger.info(MessageToPacket.ToPacket(message));
+				connectionManager.sendMessage(gatewayNo, message);
+				break;
+			}else if (tuiw==2) {  //来自网关的删除设备报文
+				try {
+					deviceStateService.deleteDeviceState(message);
+					deviceService.deleteDevcieByDeviceNo(message);
+					logger.info("设备"+message.getMessageHead().getDev_type()+"退网成功！");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				//退网报文需要Jpush到手机
+				Packet packet=DeviceMessageToPacket.ToPacket(message);
+				jpush.setGatewayNo(gatewayNo);
+				jpush.setMesssageType(1);
+				jpush.setObject(JSONObject.toJSONString(packet));
+				jpush.setPacket(packet);
+				jpush.setTime(0L);
+				jPushimpl.sendPush(jpush);
+				break;
+			}else {
+				break;
 			}
-			//退网报文需要Jpush到手机
-			String gatewayNo=GetMessageBody.GetGatewayNo(message);
-			Packet packet=DeviceMessageToPacket.ToPacket(message);
-			jpush.setGatewayNo(gatewayNo);
-			jpush.setMesssageType(1);
-			jpush.setObject(JSONObject.toJSONString(packet));
-			jpush.setPacket(packet);
-			jpush.setTime(0L);
-			jPushimpl.sendPush(jpush);
-			break;
 
 		case DataType.DATA_REQ_AUTH_DEV:
 			//收到网关的 23(设备认证请求报文) 网关中的设备状态应该是最新的，收到之后直接在数据库中查询，判断是否存在，有：更新设备，没有：添加设备  

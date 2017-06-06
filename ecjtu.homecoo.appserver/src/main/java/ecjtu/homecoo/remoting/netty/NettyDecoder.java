@@ -121,7 +121,7 @@ public class NettyDecoder extends ByteToMessageDecoder {
 //					System.out.println("收到网关上报红外的报文  "+BasicProcess.toHexString(dataTestall));
 //				}
 				if (msg.getMessageHead().getData_type()==DataType.DATA_TUIW) {
-					System.out.println("收到网关上报的退网报文  "+BasicProcess.toHexString(dataTestall));
+					System.out.println("收到退网报文  "+BasicProcess.toHexString(dataTestall));
 				}
 				break;
 			}
