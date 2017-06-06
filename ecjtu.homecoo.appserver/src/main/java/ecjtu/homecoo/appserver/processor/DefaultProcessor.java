@@ -216,7 +216,6 @@ public class DefaultProcessor extends AbstractUpdatProcesser implements NettyReq
 			String gatewayNo=GetMessageBody.GetGatewayNo(message);  //获取报文的网关号
 			int tuiw=message.getDataFrom();
 			if (tuiw==1) {   //来自app的删除设备报文
-				System.out.println(MessageToPacket.ToPacket(message));
 				logger.info(MessageToPacket.ToPacket(message));
 				connectionManager.sendMessage(gatewayNo, message);
 				break;
