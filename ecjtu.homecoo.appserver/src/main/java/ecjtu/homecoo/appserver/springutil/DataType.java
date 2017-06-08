@@ -27,7 +27,7 @@ public class DataType {
 	public static final short DATA_CHANGE_GW=30;        //设备更新    不需要回复网关    用于硬件情景音乐    update by 2014-09-24
 	public static final short DATA_ACK_SYNC=61;         //同步确认		
 	public static final short DATA_ACK_AUTH_GW=62;      //网关认证确认	    
-	public static final short DATA_ACK_AUTH_DEV=63;     //设备			
+	public static final short DATA_ACK_AUTH_DEV=63;     //设备认证确认报文			
 	public static final short DATA_ACK_USER=64;         //用户		
 	public static final short DATA_ACK_STAMP=65;        //跟踪			
 	public static final short DATA_ACK_PULSE=66;        //心跳			
